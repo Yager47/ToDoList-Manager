@@ -1,0 +1,12 @@
+.header
+  ul.nav.nav-pills.pull-right
+    - if user_signed_in?
+      li
+        = link_to "Log Out", destroy_user_session_path, method: :delete
+    - else
+      li(class=active_if_current(new_user_registration_path))
+        = link_to "Sign Up", new_user_registration_path
+      li(class=active_if_current(new_user_session_path))
+        = link_to "Sign In", new_user_session_path
+  h3.text-muted
+    = link_to "ToDoList Manager", root_path
