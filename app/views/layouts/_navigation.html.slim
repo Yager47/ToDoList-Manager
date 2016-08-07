@@ -8,5 +8,9 @@
         = link_to "Sign Up", new_user_registration_path
       li(class=active_if_current(new_user_session_path))
         = link_to "Sign In", new_user_session_path
+  - if user_signed_in?
+    h4.text-muted.pull-right
+      small
+        = current_user.email
   h3.text-muted
     = link_to "ToDoList Manager", root_path
