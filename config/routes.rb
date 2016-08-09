@@ -1,8 +1,5 @@
 Todo::Application.routes.draw do
   
-  # get "omniauth_callbacks/facebook"
-  # get "omniauth_callbacks/vkontakte"
-  
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }  
 
   namespace :api, defaults: {format: :json} do

@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
 
   has_many :task_lists, foreign_key: :owner_id
 
-  # attr_accessible :provider, :uid
-
   after_create :create_task_list
 
   def clear_authentication_token!
@@ -13,26 +11,14 @@ class User < ActiveRecord::Base
   end
 
   def create_task_list
-    task_lists.create!(name: "My first list")
+    task_lists.create!(name: "My First List")
   end
 
   def first_list
     task_lists.first
   end
 
-  def self.find_for_facebook_auth(access_token)
-    if user = User.where(email: access_token.extra.raw_info.email)
-      user
-    else 
-      User.create!(
-        email: access_token.extra.raw_info.email, 
-        password: Devise.friendly_token[0,20]
-      ) 
-    end
-  end
-
   def self.from_omniauth(auth)
-    # where(auth.slice(:provider, :uid)).first_or_create do |user|
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|  
       user.provider = auth.provider
       user.uid      = auth.uid
