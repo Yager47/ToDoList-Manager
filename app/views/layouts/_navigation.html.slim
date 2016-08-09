@@ -10,8 +10,6 @@
         = link_to "Sign In", new_user_session_path
       li
         = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
-      li
-        = link_to "Sign in with VK", user_omniauth_authorize_path(:vkontakte)   
   - if user_signed_in?
     h4.text-muted.pull-right
       small
