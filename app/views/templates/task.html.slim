@@ -1,23 +1,31 @@
 .ng-cloak(ng-init="init()")
   div.panel.panel-info.task-list
     div.panel-heading     
-      editablespan(model="task.description" on-ready="taskEdited(task.description)" input-class="form-control" span-class="list-name")   
+      editablespan(model="task.description" on-ready="taskEdited(task.description)" input-class="form-control" span-class="list-name") 
     form#new_task(ng-submit="addComment(file)")
       .input-group
-        input#taskDescription.form-control.input-lg(type="text" autofocus="autofocus" maxlength="255" ng-model="commentText" data-non-blank)        
-        input(type="file" ng-model="file" ngf-select)
+        input#taskDescription.form-control(type="text" autofocus="autofocus" maxlength="255" ng-model="commentText" data-non-blank)        
+        span.input-group-btn  
+          label.btn.btn-primary.btn-file
+            input(type="file" ng-model="file" ngf-select style="display:none;") 
+              span.glyphicon.glyphicon-file
         span.input-group-btn
-          button.btn.btn-primary.btn-lg(type="submit") Add Comment
+          button.btn.btn-primary(type="submit")
+            span.glyphicon.glyphicon-comment
+            '
+            ' +
     ul.list-group(ng-model="comments")
       li.list-group-item(ng-repeat="comment in comments | orderBy: '-id' ")
         .task-description
           editablespan(model="comment.text" on-ready="commentEdited(comment)" input-class="form-control")
-        .span
-          a(ng-href="{{comment.attach.url}}" target="_blank")
-            ' {{ attachName(comment.attach.url) }} 
         .task-buttons.pull-right
           button.btn.btn-danger.btn-xs.pull-right(type="button" ng-click="deleteComment(comment)")
-            span.glyphicon.glyphicon-ban-circle
+            span.glyphicon.glyphicon-trash
+        .span(ng-show="{{comment.attach.url}}")
+          span.glyphicon.glyphicon-file 
+          a(ng-href="{{comment.attach.url}}" target="_blank")
+            ' {{ attachName(comment.attach.url) }} 
+        hr
         .p
           small
             ' {{ comment.created_at | date : format : timezone }} 

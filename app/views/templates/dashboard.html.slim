@@ -12,8 +12,10 @@
           span.glyphicon.glyphicon-ban-circle        
         a(href="/task_lists/{{list.id}}") 
           ' {{list.name}} 
-        button.btn.btn-xs.pull-center(src="/task_lists/{{list.id}}") 
+        button.btn.btn-xs.pull-center(src="/task_lists/{{list.id}}")  
           a(href="/task_lists/{{list.id}}")
+            span.glyphicon.glyphicon-list
+            '
             ' {{list.tasks.length}}
 
   form#new_list(ng-submit="createList(listName)")
