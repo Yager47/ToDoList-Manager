@@ -22,3 +22,9 @@ angular.module('todoApp').factory 'Task', ($resource, $http) ->
 
     all: ->
       @service.query((-> null), @errorHandler)
+
+    find: (id, successHandler) ->
+      @service.get(id: id, ((task)-> 
+        successHandler?(task)
+        task), 
+       @errorHandler)

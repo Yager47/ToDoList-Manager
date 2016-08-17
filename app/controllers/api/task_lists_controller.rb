@@ -10,12 +10,12 @@ class Api::TaskListsController < Api::BaseController
   end
 
   def create
-    list = current_user.task_lists.create!(safe_params)
+    list = current_user.task_lists.create!(list_params)
     render json: list
   end
 
   def update
-    task_list.update_attributes(safe_params)
+    task_list.update_attributes(list_params)
     render nothing: true
   end
 
@@ -25,15 +25,15 @@ class Api::TaskListsController < Api::BaseController
   end
 
   private
-  def check_owner
-    permission_denied if current_user != task_list.owner
-  end
+    def check_owner
+      permission_denied if current_user != task_list.owner
+    end
 
-  def task_list
-    @task_list ||= TaskList.find(params[:id])    
-  end
+    def task_list
+      @task_list ||= TaskList.find(params[:id])    
+    end
 
-  def safe_params
-    params.require(:list).permit(:name)
-  end
+    def list_params
+      params.require(:list).permit(:name)
+    end
 end

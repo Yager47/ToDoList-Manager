@@ -5,6 +5,6 @@
 //= require turbolinks
 //= require lib/angular.min
 //= require lib/angular-resource.min
-//= require angularjs-file-upload
+//= require ng-file-upload/ng-file-upload
 //= require todoApp
 //= require_tree .

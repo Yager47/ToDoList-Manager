@@ -7,7 +7,9 @@ Todo::Application.routes.draw do
       resource :session, only: [:create, :destroy]
     end
     resources :task_lists, only: [:index, :create, :update, :destroy, :show] do
-      resources :tasks, only: [:index, :create, :update, :destroy]
+      resources :tasks, only: [:index, :create, :update, :destroy, :show] do
+        resources :comments, only: [:index, :create, :update, :destroy]
+      end
     end
   end
 
@@ -15,5 +17,7 @@ Todo::Application.routes.draw do
 
   get '/dashboard' => 'templates#index'
   get '/task_lists/:id' => 'templates#index'
+  get '/task_lists/:list_id/tasks/:id' => 'templates#index'
   get '/templates/:path.html' => 'templates#template', :constraints => { :path => /.+/  }
+  post '/uploads' => 'uploads#index'
 end

@@ -24,7 +24,8 @@
         .task-completed
           input(type="checkbox" ng-model="task.completed" ng-change="toggleTask(task)")
         .task-description
-          editablespan(model="task.description" on-ready="taskEdited(task)" input-class="form-control")
+          a(href="{{list.id}}/tasks/{{task.id}}") 
+            ' {{task.description}}
         .task-buttons.pull-right
           button.btn.btn-danger.btn-xs.pull-right(type="button" ng-click="deleteTask(task)")
             span.glyphicon.glyphicon-ban-circle
@@ -33,4 +34,4 @@
               span.glyphicon.glyphicon-time
         .task-due-date(ng-show="task.due_date")
           small
-            ' Due Date: {{task.due_date}}    
+            ' Due Date: {{ task.due_date | date : format : timezone }}
